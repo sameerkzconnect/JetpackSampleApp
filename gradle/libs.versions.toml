@@ -9,13 +9,14 @@ lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2024.04.01"
 hilt_version = "2.51.1"
-hilt_pluing_version="2.44"
+
 ksp_version="1.9.0-1.0.13"
 viewmodel_version = "2.8.4"
 android_coroutines_version = "1.9.0-RC"
 retrofit_version = "2.11.0"
 navigationCompose = "2.8.0-beta06"
 hiltNavigationCompose = "1.2.0"
+loggingInterceptor = "5.0.0-alpha.14"
 
 
 
@@ -44,10 +45,11 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit_version" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-android-hilt= {id="com.google.dagger.hilt.android",version.ref="hilt_pluing_version"}
+android-hilt= {id="com.google.dagger.hilt.android",version.ref="hilt_version"}
 android-ksp= {id="com.google.devtools.ksp",version.ref="ksp_version"}
 

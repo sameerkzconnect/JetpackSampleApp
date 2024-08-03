@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.material3)
     //hilt
     implementation(libs.hilt.android)
+    implementation(libs.logging.interceptor)
     ksp(libs.hilt.compiler)
     //retrofit
     implementation(libs.retrofit)

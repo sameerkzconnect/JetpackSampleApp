@@ -1,5 +1,6 @@
 package com.example.jetpacksampleapp.repository
 
+import android.util.Log
 import com.example.jetpacksampleapp.api.SampleAPI
 import com.example.jetpacksampleapp.models.ListItem
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,10 +18,12 @@ class SampleRepository @Inject constructor(private val sampleAPI:SampleAPI) {
         get()=_products
 
     suspend fun getCategory(){
-        val response =sampleAPI.getCategory()
-        if(response.isSuccessful && response.body().isNullOrEmpty()){
-            _category.emit(response.body()!!)
-        }
+
+            val response =sampleAPI.getCategory()
+            if(response.isSuccessful ) {
+
+                _category.emit(response.body()!!)
+            }
     }
 
     suspend fun getProducts(category: String){

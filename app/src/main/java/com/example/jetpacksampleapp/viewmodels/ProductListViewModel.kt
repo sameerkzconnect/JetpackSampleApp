@@ -1,5 +1,6 @@
 package com.example.jetpacksampleapp.viewmodels
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpacksampleapp.models.Product
@@ -11,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
-    private val sampleRepository: SampleRepository
+    private val sampleRepository: SampleRepository,
+    private val savedStateHandle: SavedStateHandle
 ) :ViewModel(){
 
     val productList: StateFlow<List<Product>>
@@ -19,7 +21,9 @@ class ProductListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            sampleRepository.getProducts("smartphones")
+            val category = savedStateHandle.get<String>("category")?:"smartphone"
+            sampleRepository.getProducts(category)
+
         }
     }
 }

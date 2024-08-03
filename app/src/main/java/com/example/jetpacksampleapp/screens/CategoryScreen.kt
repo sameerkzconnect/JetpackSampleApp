@@ -3,6 +3,7 @@ package com.example.jetpacksampleapp.screens
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,14 +28,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.jetpacksampleapp.R
 import com.example.jetpacksampleapp.viewmodels.CategoryViewModel
 
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun CategoryScreen() {
+fun CategoryScreen(onClick: (category: String) -> Unit ) {
     val categoryViewModel: CategoryViewModel = hiltViewModel()
     val category = categoryViewModel.category.collectAsState()
     Log.d("TAG", "cat" + category.value.size)
@@ -46,7 +47,7 @@ fun CategoryScreen() {
     ) {
 
         items(category.value) {
-            CategoryItem(category = it)
+            CategoryItem(category = it, onClick = onClick)
         }
 
     }
@@ -55,7 +56,10 @@ fun CategoryScreen() {
 
 //@Preview(showSystemUi = true)
 @Composable
-fun CategoryItem(modifier: Modifier = Modifier, category: String = "Item") {
+fun CategoryItem(modifier: Modifier = Modifier,
+                 category: String = "Item",
+                 onClick: (category: String) -> Unit
+                 ) {
 
     Box(
         modifier =
@@ -67,7 +71,8 @@ fun CategoryItem(modifier: Modifier = Modifier, category: String = "Item") {
                 painter = painterResource(id = R.drawable.bg_cat_item),
                 contentScale = ContentScale.Crop
             )
-            .border(1.dp, color = Color.Black, RoundedCornerShape(16.dp)),
+            .border(1.dp, color = Color.Black, RoundedCornerShape(16.dp))
+            .clickable { onClick.invoke(category) },
         contentAlignment = Alignment.Center
     ) {
         Text(

@@ -34,10 +34,10 @@ import com.example.jetpacksampleapp.viewmodels.CategoryViewModel
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun CategoryScreen( ){
-    val categoryViewModel:CategoryViewModel = hiltViewModel()
+fun CategoryScreen() {
+    val categoryViewModel: CategoryViewModel = hiltViewModel()
     val category = categoryViewModel.category.collectAsState()
-        Log.d("TAG","cat"+category.value.size)
+    Log.d("TAG", "cat" + category.value.size)
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -49,26 +49,29 @@ fun CategoryScreen( ){
             CategoryItem(category = it)
         }
 
-        }
+    }
 
 }
 
 //@Preview(showSystemUi = true)
 @Composable
-fun CategoryItem(modifier: Modifier=Modifier,category: String="Item",){
+fun CategoryItem(modifier: Modifier = Modifier, category: String = "Item") {
 
-    Box(modifier =
-    Modifier
-        .padding(16.dp)
-        .size(160.dp)
-        .clip(RoundedCornerShape(16.dp))
-        .paint(painter = painterResource(id = R.drawable.bg_cat_item),
-            contentScale = ContentScale.Crop)
-        .border(1.dp, color = Color.Black, RoundedCornerShape(16.dp)),
+    Box(
+        modifier =
+        Modifier
+            .padding(16.dp)
+            .size(160.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .paint(
+                painter = painterResource(id = R.drawable.bg_cat_item),
+                contentScale = ContentScale.Crop
+            )
+            .border(1.dp, color = Color.Black, RoundedCornerShape(16.dp)),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Text(
-            modifier=Modifier.padding(10.dp),
+            modifier = Modifier.padding(10.dp),
             text = category,
             fontSize = 22.sp,
             color = Color.White,

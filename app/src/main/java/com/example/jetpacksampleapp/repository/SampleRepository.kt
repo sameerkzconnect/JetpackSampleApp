@@ -1,8 +1,7 @@
 package com.example.jetpacksampleapp.repository
 
-import android.util.Log
 import com.example.jetpacksampleapp.api.SampleAPI
-import com.example.jetpacksampleapp.models.ListItem
+import com.example.jetpacksampleapp.models.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -13,8 +12,8 @@ class SampleRepository @Inject constructor(private val sampleAPI:SampleAPI) {
     val category :StateFlow<List<String>>
         get()=_category
 
-    private val _products = MutableStateFlow<List<ListItem>>(emptyList())
-    val products :StateFlow<List<ListItem>>
+    private val _products = MutableStateFlow<List<Product>>(emptyList())
+    val products :StateFlow<List<Product>>
         get()=_products
 
     suspend fun getCategory(){
@@ -28,8 +27,8 @@ class SampleRepository @Inject constructor(private val sampleAPI:SampleAPI) {
 
     suspend fun getProducts(category: String){
         val response = sampleAPI.getProducts(category)
-        if(response.isSuccessful && response.body().isNullOrEmpty()){
-            _products.emit(response.body()!!)
+        if(response.isSuccessful){
+            _products.emit(response.body()!!.products)
         }
     }
 
